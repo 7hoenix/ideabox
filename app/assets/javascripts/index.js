@@ -4,9 +4,12 @@ function clickMe() {
     .fail(function (data) { console.log("failed") });
 };
 function loadIdeas(ideas) {
-  debugger;
   ideas.forEach(displayIdea);
 };
 function displayIdea(element, index, array) {
-  console.log(element.title);
+  var idea = $( '<div class="idea-"' + index + '>' +
+               '<h1>' + element.title + '</h1>' +
+                '<p>' + element.body + '</p>' +
+                '<h3>' + element.quality + '</h3></div>')
+  $( document.body ).append(idea);
 }
