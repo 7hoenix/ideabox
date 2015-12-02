@@ -26,4 +26,17 @@ RSpec.describe Api::V1::IdeasController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  describe "PUT UPDATE" do
+    it "updates the idea with new content" do
+      idea = create(:idea)
+      data = { id: idea.id, title: "CAKE", body: "IS GOOD" }
+
+      put :update, id: idea.id, idea: data, format: :json
+
+      expect(response.status).to eq(200)
+      expect(json["body"]).to eq("IS GOOD")
+      expect(json["title"]).to eq("CAKE")
+    end
+  end
 end
