@@ -15,4 +15,15 @@ RSpec.describe Api::V1::IdeasController, type: :controller do
       expect(json.last["body"]).to eq(idea2.body)
     end
   end
+
+  describe "POST create" do
+    it "creates a new idea and returns true" do
+      idea = build(:idea)
+      data = { title: idea.title, body: idea.body }
+
+      post :create, data, format: :json
+
+      expect(response.status).to eq(200)
+    end
+  end
 end
