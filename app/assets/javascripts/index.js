@@ -18,7 +18,7 @@ function displayIdea(element) {
   var idea = $( '<div class="idea-' + element.id + '">' +
     '<div class="inline-edit-form-' + element.id + '">' +
      '<h1>' + element.title + '</h1>' +
-     '<p>' + element.body + '</p>' +
+     '<p>' + truncateBody(element.body) + '</p>' +
      '<h3>' + element.quality + '</h3>' +
    '</div>' +
   '<div class="inline-edit-idea-' + element.id + '">' +
@@ -71,6 +71,25 @@ function displayIdea(element) {
     changeQualityOfIdea(element, -1);
   };
   $( '#thumbs-down-idea-' + element.id ).on( 'click', handleDownClick );
+};
+
+function truncateBody(bodyText) {
+  if (bodyText.length > 100) {
+    var counter = 0;
+    var wordsToDisplay = [];
+    var bodyArray = bodyText.split(" ")
+    while (counter < 100) {
+      var temp = bodyArray.shift();
+      if ((counter + temp.length) < 100){
+        counter += temp.length
+        wordsToDisplay.push(temp);
+      } else {
+        return wordsToDisplay.join(" ");
+      }
+    }
+  } else{
+    return bodyText;
+  }
 };
 
 function displayNewIdea(idea) {
